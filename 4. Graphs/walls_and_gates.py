@@ -11,26 +11,28 @@ class Solution:
             if(i < 0 or j < 0 or i >=ROW or j >=COL or 
                 rooms[i][j] != INF or (i,j) in visited):
                 return
-            rooms[i][j] = val + 1
-            q.append((i, j, val + 1))
+            rooms[i][j] = val
+            q.append((i, j))
             visited.add((i, j))
 
         # add gates to queue
         for i in range(ROW):
             for j in range(COL):
                 if(rooms[i][j] == 0): # if room is a gate
-                    q.append((i, j, 0))
+                    q.append((i, j))
                     visited.add((i, j))
 
         # from each gate in the bfs simultaneously
+        steps = 0
         while(q):
             stamp = len(q)
+            steps += 1
             for i in range(stamp):
-                r, c, val = q.popleft()
-                bfs(r + 1, c, val)
-                bfs(r - 1, c, val)
-                bfs(r, c - 1, val)
-                bfs(r, c + 1, val)
+                r, c = q.popleft()
+                bfs(r + 1, c, steps)
+                bfs(r - 1, c, steps)
+                bfs(r, c - 1, steps)
+                bfs(r, c + 1, steps)
 
 
 
