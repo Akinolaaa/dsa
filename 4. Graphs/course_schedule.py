@@ -12,7 +12,7 @@ class Solution:
         def dfs(crs):
             if crs in visited:
                 return False
-            if hashMap == []:
+            if hashMap[crs] == []:
                 return True
             
             visited.add(crs)
