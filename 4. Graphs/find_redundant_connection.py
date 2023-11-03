@@ -3,13 +3,40 @@ import collections
 
 
 class Solution:
-    # neetcode solution
+    # neetcode solution- union find by rank
     def findRedundantConnection(self, edges: list[list[int]]) -> list[int]:
         # solution is union find algorithm
         # n = n(edges) = n(nodes) #This will always have a cycle
-        parent = [i for i in range(len(edges) + 1)]
-        rank = [1] * (len(edges) + 1)
-        # add union and find functions
+        par = [i for i in range(len(edges) + 1)] # parent- every node is initially a parent of itself till union
+        rank = [1] * (len(edges) + 1) # rank is the number of nodes in the tree
+        
+        # find function- finding the root parent
+        def find(n):
+            p = par[n]
+            while(p != par[n]):
+                par[p] = par[par[p]] # path compression- saves time
+                p = par[p]
+            return p
+        
+        # union function
+        def union(n1, n2):
+            p1, p2 = find(n1), find(n2)
+            if p1 == p2: # redundant connection found
+                return False
+            
+            if rank[p1] > rank[p2]: # do the union
+                par[p2] = p1 # change parent
+                rank[p1] += rank[p2] # increase rank of p1 cos more nodes in tree
+            else:
+                par[p1] = p2
+                rank[p2] += rank[p1]
+            return True
+        
+        res = []
+        for a, b in edges:
+            if(not union(a, b)):
+                res = [a, b]
+        return res
 
     # my bfs solution - 4/39
     def findRedundantConnectionBFS(self, edges: list[list[int]]) -> list[int]:
