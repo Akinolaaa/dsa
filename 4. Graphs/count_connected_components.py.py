@@ -5,6 +5,7 @@ class Solution:
     """
     Perform union find on edge with rank
     Return number of distinct parents in parents array
+    Neetcode- A better way is to return 1 if there's a union and 0 if there isn't and subtract from the number of nodes
     Another solution is to draw the graph and perform dfs on every node not seen
     """
 
