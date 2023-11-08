@@ -27,5 +27,5 @@ class Solution:
       return dfs(node)
 
 solution = Solution()
-random_node = Node(23);
+random_node = Node(23)
 solution.cloneGraph(random_node)
