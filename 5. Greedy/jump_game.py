@@ -1,13 +1,11 @@
-#
-
-
+#  https://leetcode.com/problems/jump-game
 class Solution:
     # Theres also a DP solution but greedy is better
     def canJump(self, nums: list[int]) -> bool:
         goal = len(nums) - 1
 
         for i in range(len(nums) - 2, -1, -1):
-            if(nums[i] + i >= goal):
+            if nums[i] + i >= goal:
                 goal = i
         return goal == 0
 
