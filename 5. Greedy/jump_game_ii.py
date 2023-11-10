@@ -8,16 +8,22 @@ class Solution:
     def minimumJumps(self, nums: list[int]) -> int:
         q = collections.deque()
         q.append(0)
-
+        visited = set()
         jumps = 0
         while q:
+            print("----jump")
             for i in range(len(q)):
                 j = q.popleft()
+                print(j)
                 if j == len(nums) - 1:
                     return jumps
-                if j + nums[j] <= len(nums):
-                    for a in range(j + 1, j + nums[j] + 1):
+                for a in range(j + 1, j + nums[j] + 1):
+                    if a not in visited and a < len(nums):
                         q.append(a)
+                        visited.add(a)
+                    # early return
+                    if a == len(nums) - 1:
+                        return jumps + 1
             jumps += 1
 
         return jumps
@@ -25,5 +31,7 @@ class Solution:
 
 numbers = [2, 3, 1, 1, 4]
 numbers1 = [2, 3, 0, 1, 4]
+numbers2 = [3, 4, 3, 2, 5, 4, 3]
+numbers3 = [9, 8, 2, 2, 0, 2, 2, 0, 4, 1, 5, 7, 9, 6, 6, 0, 6, 5, 0, 5]
 
-print(Solution().minimumJumps(numbers1))
+print(Solution().minimumJumps(numbers3))
