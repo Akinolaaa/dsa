@@ -1,6 +1,5 @@
 # 300
 
-
 class Solution:
     def longestIncreasingSubsequence(self, nums: list[int]) -> int:
         dp = [1] * len(nums)
