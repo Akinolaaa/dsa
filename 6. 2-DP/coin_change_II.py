@@ -1,5 +1,22 @@
 # 518- https://leetcode.com/problems/coin-change-ii/
 class Solution:
+    # DYNAMIC PROGRAMMING
+    # Time: O(n*m)
+    # Memory: O(n) where n = amount
+    def changer(self, amount: int, coins: list[int]) -> int:
+        dp = [0] * (amount + 1)
+        dp[0] = 1
+        for i in range(len(coins) - 1, -1, -1):
+            nextDP = [0] * (amount + 1)
+            nextDP[0] = 1
+
+            for a in range(1, amount + 1):
+                nextDP[a] = dp[a]
+                if a - coins[i] >= 0:
+                    nextDP[a] += nextDP[a - coins[i]]
+            dp = nextDP
+        return dp[amount]
+
     # dp solution
     def change(self, amount: int, coins: list[int]) -> int:
         row = [0] * (amount + 1)
@@ -9,9 +26,7 @@ class Solution:
             newRow = [0] * (amount + 1)
             newRow[0] = 1
             for j in range(1, amount + 1):
-                if j - coins[i] < 0:
-                    newRow[j] = 0
-                else:
+                if j - coins[i] >= 0:
                     newRow[j] = row[j] + newRow[j - coins[i]]
             row = newRow
             print(row)
