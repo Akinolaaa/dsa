@@ -1,5 +1,4 @@
-#
-
+# 191 https://leetcode.com/problems/number-of-1-bits/
 
 class Solution:
     def hammingWeight(self, n: int) -> int:
@@ -16,6 +15,6 @@ class Solution:
         while n:
             # minus one removes the rightmost 1 bit.
             # bitwaise and turns bits to the right of rightmost to 0 and the left remains the same.
-            n = n & (n - 1) 
+            n = n & (n - 1)
             res += 1
         return res
